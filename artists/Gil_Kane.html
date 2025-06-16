@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gil Kane– Fortress of Covers</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <h1>Comic Covers by Gil Kane</h1>
+  <div id="covers-container"></div>
+
+  <script>
+    const artistName = "Gil Kane";
+    fetch("/data/marvel_jan_1982.csv")
+      .then(response => response.text())
+      .then(csv => {
+        const rows = csv.split('\n').slice(1);
+        const container = document.getElementById("covers-container");
+
+        rows.forEach(row => {
+          const cols = row.split(',');
+          if (cols[3]?.trim() === artistName) {
+            const imageUrl = cols[1]; // adjust if needed
+            const title = cols[0];
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = title;
+            img.style.width = "200px";
+            container.appendChild(img);
+          }
+        });
+      });
+  </script>
+</body>
+</html>
