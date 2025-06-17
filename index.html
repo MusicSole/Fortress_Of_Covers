@@ -211,13 +211,12 @@
 
         const info = document.createElement("div");
         info.className = "info";
-        info.innerHTML = `
-          <strong>${r.Title} #${r.Issue}</strong><br>
-          Pencils: ${r.Pencils}<br>
-          Inker: ${r.Inker}<br>
-          Grade: ${r.Grade}<br>
-        `;
-
+  info.innerHTML = `
+  <strong>${r.Title} #${r.Issue}</strong><br>
+  Pencils: <a href="${artistFile}" target="_blank">${r.Pencils}</a><br>
+  Inker: ${r.Inker}<br>
+  Grade: ${r.Grade}<br>
+`;
         card.appendChild(info);
         gallery.appendChild(card);
       });
