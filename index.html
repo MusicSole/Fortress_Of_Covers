@@ -3,167 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <title>Fortress of Covers</title>
-  <style>
-  
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; text-align: center; }
-    h1 { font-size: 3em; margin-bottom: 5px; }
-    p.logline { font-style: italic; font-size: 1.3em; margin-bottom: 30px; }
-    select { padding: 8px 12px; font-size: 1em; margin: 0 6px 20px; }
-    button { padding: 10px 25px; font-size: 1em; cursor: pointer; }
-    #gallery { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; }
-    .card { width: 200px; }
-    .card img { width: 100%; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,.2); }
-    .card .info { margin-top: 8px; font-size: 0.9em; line-height: 1.4em; }
-    .card {
-  width: 200px;
-  position: relative;
-  transition: transform 0.3s ease;
-}
-.card {
-  width: 200px;
-  margin: 10px;
-  display: inline-block;
-  vertical-align: top;
-  font-family: sans-serif;
-}
-
-.card img {
-  width: 100%;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover img {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-}
-
-.card .info {
-  margin-top: 5px;
-  font-size: 0.85em;
-  color: #333;
-  text-align: left;
-}.card {
-  width: 220px;
-  margin: 10px;
-  padding: 10px;
-  display: inline-block;
-  vertical-align: top;
-  font-family: sans-serif;
-  background-color: #fdfdfd;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.02);
-  box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
-}
-
-.card img {
-  width: 100%;
-  border-radius: 4px;
-  display: block;
-}
-
-.card .info {
-  margin-top: 8px;
-  font-size: 0.85em;
-  color: #333;
-  text-align: left;
-  line-height: 1.4em;
-}
-.logo-container {
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-
-.logo {
-  font-size: 3em;
-  font-family: 'Impact', 'Bangers', sans-serif;
-  letter-spacing: 0.05em;
-  color: #111;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideIn 0.6s forwards;
-}
-
-.reveal:nth-child(1) {
-  animation-delay: 0s;
-}
-.reveal:nth-child(2) {
-  animation-delay: 0.4s;
-}
-.reveal:nth-child(3) {
-  animation-delay: 0.8s;
-}
-
-@keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.tagline {
-  font-size: 1.1em;
-  font-style: italic;
-  color: #555;
-  margin-top: 10px;
-}
-  </style>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      text-align: center;
+    }
 
+    .logo-container {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      font-size: 3em;
+      font-family: 'Bangers', Impact, sans-serif;
+      letter-spacing: 0.05em;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideIn 0.6s forwards;
+    }
+
+    .reveal:nth-child(1) { animation-delay: 0s; }
+    .reveal:nth-child(2) { animation-delay: 0.4s; }
+    .reveal:nth-child(3) { animation-delay: 0.8s; }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tagline {
+      font-size: 1.1em;
+      font-style: italic;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    select, button {
+      padding: 8px 12px;
+      font-size: 1em;
+      margin: 10px 5px;
+    }
+
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .card {
+      width: 220px;
+      margin: 10px;
+      padding: 10px;
+      display: inline-block;
+      vertical-align: top;
+      font-family: sans-serif;
+      background-color: #fdfdfd;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .card .info {
+      margin-top: 8px;
+      font-size: 0.85em;
+      color: #333;
+      text-align: left;
+      line-height: 1.4em;
+    }
+  </style>
 </head>
 <body>
 
   <div class="logo-container">
-  <h1 class="logo">
-    <span class="reveal">FORTRESS</span>
-    <span class="reveal">OF</span>
-    <span class="reveal">COVERS</span>
-  </h1>
-  <p class="tagline">Every Cover Tells A Story</p>
-</div>
+    <h1 class="logo">
+      <span class="reveal">FORTRESS</span>
+      <span class="reveal">OF</span>
+      <span class="reveal">COVERS</span>
+    </h1>
+    <p class="tagline">Every Cover Tells A Story</p>
+  </div>
 
-  <select id="month">
-    <option disabled selected>Month</option>
-    <option>January</option><option>February</option><option>March</option>
-    <option>April</option><option>May</option><option>June</option>
-    <option>July</option><option>August</option><option>September</option>
-    <option>October</option><option>November</option><option>December</option>
-  </select>
+  <div>
+    <select id="month">
+      <option disabled selected>Month</option>
+      <option>January</option><option>February</option><option>March</option>
+      <option>April</option><option>May</option><option>June</option>
+      <option>July</option><option>August</option><option>September</option>
+      <option>October</option><option>November</option><option>December</option>
+    </select>
 
-  <select id="year">
-    <option disabled selected>Year</option>
-  </select>
+    <select id="year">
+      <option disabled selected>Year</option>
+    </select>
 
-  <select id="publisher">
-    <option disabled selected>Publisher</option>
-    <option>Marvel</option>
-    <option>DC</option>
-  </select>
-  
+    <select id="publisher">
+      <option disabled selected>Publisher</option>
+      <option>Marvel</option>
+      <option>DC</option>
+    </select>
 
-  <br>
-  <button id="submitBtn">Activate</button>
+    <button id="submitBtn">Activate</button>
+  </div>
 
   <div id="gallery"></div>
 
   <script>
-    // 1. Populate Year dropdown
+    // Populate Year dropdown
     const yearSelect = document.getElementById("year");
     for (let y = 1961; y <= 1999; y++) {
       const opt = document.createElement("option");
@@ -171,7 +152,7 @@
       yearSelect.appendChild(opt);
     }
 
-    // 2. Load CSV data
+    // Load CSV from Google Sheets
     const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS9X8_M96iiWVsSNJdFBwsw1lZQSLPwVPYD9iFihyyWsckkl8NqBbBuDWzWjzdH2ph7jsU46J9GxN0R/pub?output=csv";
     let sheetRows = [];
 
@@ -189,7 +170,7 @@
       })
       .catch(err => alert("Error loading Google Sheet: " + err));
 
-    // 3. Handle Submit
+    // Handle Submit
     document.getElementById("submitBtn").addEventListener("click", () => {
       const month = document.getElementById("month").value;
       const year = document.getElementById("year").value;
@@ -219,13 +200,11 @@
         card.className = "card";
 
         const img = document.createElement("img");
-       img.src = r["Image URL"];
-
+        img.src = r["Image URL"];
         img.alt = r.Title;
 
-        const artistFile = "artists/" + r.Pencils.toLowerCase().replaceAll(" ", "_") + ".html";
-
         const link = document.createElement("a");
+        const artistFile = "artists/" + r.Pencils.toLowerCase().replaceAll(" ", "_") + ".html";
         link.href = artistFile;
         link.appendChild(img);
         card.appendChild(link);
@@ -238,8 +217,8 @@
           Inker: ${r.Inker}<br>
           Grade: ${r.Grade}<br>
         `;
-        card.appendChild(info);
 
+        card.appendChild(info);
         gallery.appendChild(card);
       });
     });
@@ -247,4 +226,3 @@
 
 </body>
 </html>
-
