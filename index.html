@@ -3,10 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <title>Fortress of Covers</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; text-align: center; }
+    h1 { font-size: 3em; margin-bottom: 5px; }
+    p.logline { font-style: italic; font-size: 1.3em; margin-bottom: 30px; }
+    select { padding: 8px 12px; font-size: 1em; margin: 0 6px 20px; }
+    button { padding: 10px 25px; font-size: 1em; cursor: pointer; }
+    #gallery { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px; }
+    .card { width: 200px; }
+    .card img { width: 100%; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,.2); }
+    .card .info { margin-top: 8px; font-size: 0.9em; line-height: 1.4em; }
+  </style>
 </head>
 <body>
+
   <h1>Fortress of Covers</h1>
-  <p>Every Cover Tells a Story.</p>
-  <p>This is a placeholder index.html to make the site live.</p>
+  <p class="logline">Every Cover Tells A Story</p>
+
+  <select id="month">
+    <option disabled selected>Month</option>
+    <option>January</option><option>February</option><option>March</option>
+    <option>April</option><option>May</option><option>June</option>
+    <option>July</option><option>August</option><option>September</option>
+    <option>October</option><option>November</option><option>December</option>
+  </select>
+
+  <select id="year">
+    <option disabled selected>Year</option>
+  </select>
+
+  <select id="publisher">
+    <option disabled selected>Publisher</option>
+    <option>Marvel</option>
+    <option>DC</option>
+  </select>
+
+  <br>
+  <button id="submitBtn">Submit</button>
+
+  <div id="gallery"></div>
+
+  <script>
+    // 1. Populate Year dropdown
+    const yearSelect = document.getElementById("year");
+    for (let y = 1961; y <= 1999; y++) {
+      const opt = document.createElement("option");
+      opt.value = opt.textContent = y;
+      yearSelect.appendChild(opt);
+    }
+
+    // 2. Load CSV data
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS9X8_M96iiWVsSNJdFBwsw1lZQSLPwVPYD9iFihyyWsckkl8NqBbBuDWzWjzdH2ph7jsU46J9GxN0R/pub?output=csv";
+    let sheetRows = [];
+
+    fetch(sheetURL)
+      .then(r => r.text())
+      .then(csv => {
+        const [headerLine, ...lines] = csv.trim().split("\n");
+        const headers = headerLine.split(",").map(h => h.trim());
+        sheetRows = lines.map(line => {
+          const values = line.split(",").map(v => v.trim());
+          const obj = {};
+          headers.forEach((h, i) => obj[h] = values[i]);
+          return obj;
+        });
+      })
+      .catch(err => alert("Error loading Google Sheet: " + err));
+
+    // 3. Handle Submit
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      const month = document.getElementById("month").value;
+      const year = document.getElementById("year").value;
+      const pub = document.getElementById("publisher").value;
+
+      if (!month || !year || !pub) {
+        alert("Please choose Month, Year, and Publisher");
+        return;
+      }
+
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+
+      const matches = sheetRows.filter(r =>
+        r.Month === month &&
+        r.Year === year &&
+        r.Publisher === pub
+      );
+
+      if (matches.length === 0) {
+        gallery.textContent = "No matches found.";
+        return;
+      }
+
+      matches.forEach(r => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const img = document.createElement("img");
+       img.src = r["Image URL"];
+
+        img.alt = r.Title;
+
+        const artistFile = "artists/" + r.Pencils.toLowerCase().replaceAll(" ", "_") + ".html";
+
+        const link = document.createElement("a");
+        link.href = artistFile;
+        link.appendChild(img);
+        card.appendChild(link);
+
+        const info = document.createElement("div");
+        info.className = "info";
+        info.innerHTML = `
+          <strong>${r.Title} #${r.Issue}</strong><br>
+          Pencils: ${r.Pencils}<br>
+          Inker: ${r.Inker}<br>
+          Grade: ${r.Grade}<br>
+          Publisher: ${r.Publisher}
+        `;
+        card.appendChild(info);
+
+        gallery.appendChild(card);
+      });
+    });
+  </script>
+
 </body>
 </html>
+
+
