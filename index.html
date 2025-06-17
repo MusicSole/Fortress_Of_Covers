@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Fortress of Covers</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-image: url('https://musicsole.github.io/Fortress_Of_Covers/assets/background-covers.jpg');
+      background-image: url('https://raw.githubusercontent.com/MusicSole/Fortress_Of_Covers/main/assets/background-images.jpg');
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: contain;
       background-position: top center;
       background-attachment: fixed;
+      background-color: #f4f4f4;
       margin: 0;
       padding: 40px;
       text-align: center;
@@ -77,13 +78,14 @@
       width: 220px;
       margin: 10px;
       padding: 10px;
+      display: inline-block;
+      vertical-align: top;
+      font-family: sans-serif;
       background-color: #fdfdfd;
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      font-family: sans-serif;
-      text-align: left;
     }
 
     .card:hover {
@@ -107,6 +109,7 @@
       margin-top: 8px;
       font-size: 0.85em;
       color: #333;
+      text-align: left;
       line-height: 1.4em;
     }
   </style>
@@ -147,7 +150,7 @@
   <div id="gallery"></div>
 
   <script>
-    // Populate Year dropdown
+    // Populate year dropdown
     const yearSelect = document.getElementById("year");
     for (let y = 1961; y <= 1999; y++) {
       const opt = document.createElement("option");
@@ -173,7 +176,7 @@
       })
       .catch(err => alert("Error loading Google Sheet: " + err));
 
-    // Handle Submit
+    // Handle submit
     document.getElementById("submitBtn").addEventListener("click", () => {
       const month = document.getElementById("month").value;
       const year = document.getElementById("year").value;
@@ -206,9 +209,8 @@
         img.src = r["Image URL"];
         img.alt = r.Title;
 
-        const artistFile = "artists/" + r.Pencils.toLowerCase().replaceAll(" ", "_") + ".html";
-
         const link = document.createElement("a");
+        const artistFile = "artists/" + r.Pencils.toLowerCase().replaceAll(" ", "_") + ".html";
         link.href = artistFile;
         link.appendChild(img);
         card.appendChild(link);
@@ -222,6 +224,7 @@
           Grade: ${r.Grade}<br>
         `;
         card.appendChild(info);
+
         gallery.appendChild(card);
       });
     });
