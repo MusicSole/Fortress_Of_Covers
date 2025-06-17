@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Fortress of Covers</title>
   <style>
+  
     body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; text-align: center; }
     h1 { font-size: 3em; margin-bottom: 5px; }
     p.logline { font-style: italic; font-size: 1.3em; margin-bottom: 30px; }
@@ -75,14 +76,67 @@
   text-align: left;
   line-height: 1.4em;
 }
+.logo-container {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
 
+.logo {
+  font-size: 3em;
+  font-family: 'Impact', 'Bangers', sans-serif;
+  letter-spacing: 0.05em;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
 
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideIn 0.6s forwards;
+}
+
+.reveal:nth-child(1) {
+  animation-delay: 0s;
+}
+.reveal:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.reveal:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tagline {
+  font-size: 1.1em;
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
+}
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-  <h1>Fortress of Covers</h1>
-  <p class="logline">Every Cover Tells A Story</p>
+  <div class="logo-container">
+  <h1 class="logo">
+    <span class="reveal">FORTRESS</span>
+    <span class="reveal">OF</span>
+    <span class="reveal">COVERS</span>
+  </h1>
+  <p class="tagline">Every Cover Tells A Story</p>
+</div>
 
   <select id="month">
     <option disabled selected>Month</option>
@@ -101,6 +155,7 @@
     <option>Marvel</option>
     <option>DC</option>
   </select>
+  
 
   <br>
   <button id="submitBtn">Activate</button>
